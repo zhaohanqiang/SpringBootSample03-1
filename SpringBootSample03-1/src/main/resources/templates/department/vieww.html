@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+<head>
+<link href="/css/list1.css" rel="stylesheet"></link>
+
+<body>
+
+        <h1 style="text-align: center;"> ユーザー情報詳細</h1>
+
+
+  <form th:action="@{/department/departmentview}" th:object="${EmpRequest2}" th:method="post">
+ <table>
+<tr>
+
+ <div class="row mx-md-n5">
+        <div class="col-2 pt-3 border bg-light">id</div>
+        <div class="col pt-3 border">
+             <input type="text" class="form-control" th:field="*{id1}">
+        </div>
+      </div>
+
+
+   <div class="row mx-md-n5">
+        <div class="col-2 pt-3 border bg-light">氏名</div>
+        <div class="col pt-3 border">
+             <input type="text" class="form-control" th:field="*{name}">
+        </div>
+      </div>
+
+      <div class="row mx-md-n5">
+        <div class="col-2 pt-3 border bg-light">担当地区</div>
+        <div class="col pt-3 border">
+             <input type="text" class="form-control" th:field="*{address}">
+        </div>
+      </div>
+        <div class="row mx-md-n5">
+        <div class="col-2 pt-3 border bg-light">売上</div>
+        <div class="col pt-3 border">
+             <input type="text" class="form-control" th:field="*{guest}">
+        </div>
+      </div>
+      <div class="row mx-md-n5">
+        <div class="col-2 pt-3 border bg-light">保有願客数</div>
+        <div class="col pt-3 border">
+             <input type="text" class="form-control" th:field="*{Sales}">
+        </div>
+      </div>
+      <div class="row mx-md-n5">
+        <div class="col-2 pt-3 border bg-light">更新日</div>
+        <div class="col pt-3 border">
+             <input type="text" class="form-control" th:field="*{day}">
+        </div>
+      </div>
+      <div class="row mx-md-n5">
+        <div class="col-2 pt-3 border bg-light">部門id</div>
+        <div class="col pt-3 border">
+             <input type="text" class="form-control" th:field="*{sid}">
+        </div>
+      </div>
+    <br />
+    <div class="text-center">
+        <input type="submit" class="btn btn-primary" value="　保存　">
+        </div> <div class="text-center">
+
+        </div>
+</tr>
+    </table>
+
+
+ </form>
+
+</body>
+</html>
+
+
+
+

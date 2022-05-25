@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>検索結果</title>
+<link href="/css/list1.css" rel="stylesheet"></link>
+<meta charset="utf-8" />
+</head>
+<body>
+   <h1>検索結果</h1>
+    <div>
+        <a th:href="@{/department/departmentlist/}">一覧に戻る</a>
+    </div>
+<div style="text-align:center">
+<button class="btn add input active" type="button" onclick="addRow()">行複製</button>
+<form th:action="@{/user/update}" th:object="${userData}" th:method="post">
+<button id="submittmp" type="submit" class="btn input savetmp active" name="savetmp" formaction="/smp_hr/transportCostApp/savetmp">一時保存</button>
+<button id="confirm" type="submit" class="btn confirm input active" name="confirm" formaction="/smp_hr/transportCostApp/confirm">確定</button>
+</form>
+</div>
+	<h1 th:text="*{depname}"></h1>
+<div class="Aboxa" >
+	   <table >
+        <thead>
+            <tr>
+            <th>id</th>
+                <th>氏名</th>
+                <th>担当地区</th>
+                <th>売上</th>
+        <th>保有願客数</th>
+          <th>更新日</th>
+            </tr>
+        </thead>
+	        <tbody >
+            <tr th:if="${department1.state<1}"   th:each="department1 : ${dilist}" th:object="${department1}"  class="align-middle">　
+ 				<td  class="center" th:text="*{id1}"></td>
+                <td class="center" th:text="*{name}"></td>
+                <td th:text="*{address}"></td>
+                <td th:text="*{guest}"></td>
+                <td class="center" th:text="*{Sales}"></td>
+                 <td class="center" th:text="*{day}"></td>
+                 <td> <div style="text-align:center">
+                 <a th:href="@{/department1/{id1}(id1=*{id1})}"  class="btn btn-secondary">
+                 <input type="submit" value="編集" class="btn" style="background-color:#33CCCC"></a></div></td>
+                  <td><div >
+             <form th:action="@{/department/}+${department1.id1}" method="post" onclick="return  myFunction()">
+                      <input type="hidden" name="_method" value="delete"/>
+                     <button type="submit">削除</button>
+             </form></div></td>
+          </tr>
+			<tr th:if="${department1.state>0}" th:each="department1 : ${dilist}" th:object="${department1}"  >
+				<td class="center"  ></td>
+                <td class="center" ></td>
+                <td ></td>
+                <td ></td>
+                <td class="center"></td>
+                <td></td>
+			  <td><div style="text-align:center">
+			 <input type="submit" value="編集" class="btn" style="background-color:#33CCCC"></div></td>
+
+<td><div style="text-align:center">
+			 <input type="submit" value="削除" ></div></td>
+</tr>
+
+        </tbody>
+
+    </table>
+    </div>
+
+</body>
+</html>
+
+
+

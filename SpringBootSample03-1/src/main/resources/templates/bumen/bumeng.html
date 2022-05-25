@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title>社員新規登録</title>
+
+<meta charset="utf-8" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+</head>
+<body>
+
+<h1 style="text-align: center;"> ユーザー情報詳細</h1>
+<input type="submit" value="行新規"  onclick="add()">
+    <input type="submit" value="行複製" id="copyRow"  >
+    <input type="button" value=リセット   onclick="replaceDoc()">
+
+<form th:action="bumen" th:object="${empRequest2}" method="post" name="frm">
+<input  onclick="frm.action='/bumen/bumeng'; "  type="submit" value="保存" style="margin-left:550px">
+<input onclick="frm.action='/bumen/create';return myFunction();" type="submit" value="確定"  >
+        <table  id="feeTable">
+               <thead>
+            <tr >
+                <th>氏名</th>
+                <th>担当地区</th>
+                <th>売上</th>
+                <th>保有顧客数</th>
+                <th>配属先</th>
+				<th></th>
+            </tr>
+        </thead>
+
+          <tbody th:if="${department11.size()<1}" id="feeBody" >
+            <tr    >
+             <td ><input name="ename" type="text"  /></td>
+          <td><input  name="eaddress"type="text"/></td>
+          <td><input name="eguest"type="text" ></td>
+          <td><input name="esales"type="text"/></td>
+         <td><input name="esid"type="text"/></td>
+         <td><input type="button" class="del input text-nowrap btn-sm active" value="删除" onclick="removeRow(this.parentNode.parentNode)"></td>
+
+     </tr>
+</tbody>
+
+
+
+<tbody th:if="${department11.size()>0}"  id="feeBody"  >
+
+    <tr th:each="EmpRequest2:${department11}" th:object="${EmpRequest2}"  class="Aboxa"   >
+
+          <td ><input name="ename" type="text" th:value="*{name}" /></td>
+          <td><input   name="eaddress" type="text"th:value="*{address}"/></td>
+          <td><input name="eguest"type="text" th:value="*{guest}"/></td>
+          <td><input name="esales" type="text"th:value="*{sales}"/></td>
+         <td><input name="esid"type="text"th:value="*{sid}"/></td>
+         <td><input name="eaddress"type="button" class="del input text-nowrap btn-sm active" value="删除" onclick="removeRow(this.parentNode.parentNode)"></td>
+
+     </tr>
+</tbody>
+
+
+
+        </table>
+
+</form>
+
+
+
+
+
+<script th:inline="javascript">
+function add() {
+
+	 let tianjia = $("table tbody tr:last").clone();
+	 tianjia.find('input:text').val('');
+
+	    $("table tbody").append(tianjia);
+}
+
+
+function removeRow(r)
+{
+var root = r.parentNode;
+var allRows = root.getElementsByTagName('tr')
+if(allRows.length>1)
+   root.removeChild(r);
+else
+   alert("only one row left, you not need to remove it.");
+}
+
+    const $copyRow = document.getElementById('copyRow');
+    const $tbody = document.getElementById('feeBody');
+    $copyRow.addEventListener('click', ()=> {
+    	/*var myselect = document.getElementById("bumen");
+    	var index=myselect.selectedIndex ;
+    	var text= myselect.options[index].value;//取得选择框的值*/
+        let clone = $tbody.lastElementChild.cloneNode(true);
+        $tbody.appendChild(clone)
+         console.log(clone);
+
+        var text = info.data[info.data.length-1]
+        $("select:last").val(text);
+
+    })
+    function myFunction()
+	{
+	  if(confirm('この作業は修正できません。本当によろしいですか。')){
+
+          return true;
+
+          }
+     else{
+          return false;
+      		}
+		}
+    function replaceDoc()
+    {
+        window.location.replace("http://localhost:8080/bumen/bumeng")
+        info();
+    }
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
